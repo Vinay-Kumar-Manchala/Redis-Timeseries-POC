@@ -63,20 +63,6 @@
     </li>
 </ol>
 
-<h2>Examples</h2>
-
-<p>Here are some examples of how to use the utility:</p>
-
-<pre>
-<code>
-# Store time-series data in Redis
-python store_timeseries.py
-
-# Query time-series data from Redis
-python query_timeseries.py
-</code>
-</pre>
-
 <h2>Configuration</h2>
 
 <p>To configure the Redis TimeSeries Data Storage Utility, you need to specify the following details in a configuration file:</p>
@@ -86,16 +72,6 @@ python query_timeseries.py
     <li><strong>Database:</strong> The Redis database to use.</li>
     <li><strong>Authentication:</strong> If required, provide authentication credentials.</li>
 </ul>
-
-<p>An example configuration file, <code>config.json</code>, is included with the utility.</p>
-
-<h2>Contributing</h2>
-
-<p>We welcome contributions from the open-source community. If you'd like to contribute to this project, please follow our <a href="CONTRIBUTING.md">Contribution Guidelines</a>.</p>
-
-<h2>License</h2>
-
-<p>This project is licensed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for details.</p>
 
 <hr>
 
