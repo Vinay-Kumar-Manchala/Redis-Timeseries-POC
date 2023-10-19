@@ -2,9 +2,9 @@ import os
 import redis
 import psycopg2
 from dotenv import load_dotenv
-load_dotenv()
 from contextlib import contextmanager
 from psycopg2.extras import RealDictCursor
+load_dotenv()
 
 
 class SqlDbReader:
