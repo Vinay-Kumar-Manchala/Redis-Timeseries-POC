@@ -1,5 +1,4 @@
-
-from rtdms_redis_timeseries.redis_timeseries_utility import RedisTimeSeries, PostgresLogger
+from redis_timeseries_utility import RedisTimeSeries, PostgresLogger
 
 redis_obj = RedisTimeSeries()
 post_obj = PostgresLogger()
@@ -18,8 +17,8 @@ ingestion_stream = {
 try:
     # insertion -- ts.create will create the timeseries skeleton. The future datapoints will carry the same labels that we specify in ts.create
 
-    # result = redis_obj.insert_bulk_datapoints(timeseries_key="ganga_live_data",
-    #                                           data=ingestion_stream, duplicate_policy="last")
+    result = redis_obj.insert_bulk_datapoints(timeseries_key="ganga_live_data",
+                                              data=ingestion_stream, duplicate_policy="last")
 
     # aggregation on a single timeseries key. Mandatory to specify the time_series_key
     # result = redis_obj.aggregate_one_timeseries(start_time=1671940300000, end_time=1698960200120,
@@ -40,7 +39,6 @@ try:
 
     # executes our own rts query
 
-    result = post_obj.redis_db_cleaner()
     print(result)
 except Exception as e:
     print(e)

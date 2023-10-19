@@ -1,5 +1,8 @@
+import os
 import redis
 import psycopg2
+from dotenv import load_dotenv
+load_dotenv()
 from contextlib import contextmanager
 from psycopg2.extras import RealDictCursor
 
@@ -7,11 +10,11 @@ from psycopg2.extras import RealDictCursor
 class SqlDbReader:
     def __init__(self):
         self.connection = psycopg2.connect(
-            host="34.100.243.227",
-            user="root",
-            password="Secret@123",
-            dbname="postgres",
-            port="5432"
+            host=os.environ.get('POSTGRES_HOST'),
+            user=os.environ.get('POSTGRES_USER'),
+            password=os.environ.get('POSTGRES_PASSWORD'),
+            dbname=os.environ.get('POSTGRES_DB'),
+            port=os.environ.get('POSTGRES_PORT')
         )
         self.cursor_type = RealDictCursor
 
@@ -34,7 +37,9 @@ class SqlDbReader:
 
 class RedisDbReader:
     def __init__(self):
-        self.redis_client = redis.StrictRedis(host="192.168.0.210", port=4004, decode_responses=True)
+        self.redis_client = redis.StrictRedis(host=os.environ.get('REDIS_HOST'),
+                                              port=int(os.environ.get('REDIS_PORT')),
+                                              decode_responses=True)
 
     @contextmanager
     def redis_connect(self):
