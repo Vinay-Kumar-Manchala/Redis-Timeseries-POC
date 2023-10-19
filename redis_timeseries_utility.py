@@ -193,6 +193,35 @@ class RedisTimeSeries:
 
         return flag
 
+    def alter_timeseries_key_configuration(self, timeseries_key: str, labels=None, duplicate_policy = None,
+                                           retention_policy: int = 0):
+        """
+        This method is for altering the configurations like label values, retention and duplicate policies of a
+        timeseries key
+
+        :param timeseries_key: name of the timeseries to alter
+        :param labels: dictionary containing updated labels
+        :param duplicate_policy: policy for handling duplicate timestamps for a particular timeseries key
+        :param retention_policy: policy for auto deleting the datapoints after a specific time period
+        :return: boolean indicating the query status
+        """
+
+        try:
+            labels = f" LABELS {' '.join(f'{key} {value}' for key, value in labels.items())} " \
+                     if labels is not None else ""
+            retention_policy = f"RETENTION {retention_policy}" if retention_policy else ""
+            duplicate_policy = f"DUPLICATE_POLICY {duplicate_policy}" if duplicate_policy is not None else ""
+
+            rts_query = f"TS.ALTER {timeseries_key} {retention_policy} {duplicate_policy} {labels}"
+            with self.redis_client.redis_connect() as rts_conn:
+                rts_conn.execute_command(rts_query)
+                PostgresLogger().log_timeseries(timeseries_name=timeseries_key)
+            return True
+
+        except Exception as e:
+            logging.error(str(e))
+            return False
+
     @staticmethod
     def time_converter(time_dict: Dict):
         """
