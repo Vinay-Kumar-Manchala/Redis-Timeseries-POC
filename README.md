@@ -36,7 +36,7 @@
 <ol>
     <li><strong>Prerequisites:</strong> Ensure you have Redis installed and configured with the TimeSeries module. For Redis installation instructions, visit <a href="https://redis.io/download">Redis.io</a>.</li>
     <li><strong>Clone the Repository:</strong> Clone this repository to your local environment using the following command:
-        <pre>git clone https://github.com/your-username/your-repo.git</pre>
+        <pre>git clone https://github.com/Vinay-Kumar-Manchala/Redis-Timeseries-POC.git</pre>
     </li>
     <li><strong>Install Dependencies:</strong> Install any required dependencies using your preferred package manager.</li>
     <li><strong>Configuration:</strong> Configure the utility to connect to your Redis database (see <a href="#configuration">Configuration</a>).</li>
